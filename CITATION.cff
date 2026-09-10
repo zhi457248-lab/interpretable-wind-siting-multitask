@@ -1,0 +1,26 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+type: software
+title: "Interpretable Multi-Task Fusion Framework for Wind Farm Siting"
+date-released: 2026-09-10
+license: MIT
+repository-code: "https://github.com/<your-org>/interpretable-wind-siting-multitask"
+keywords:
+  - wind energy
+  - site selection
+  - deep learning
+  - TabTransformer
+  - BERT-LoRA
+  - cross-modal learning
+  - multi-task learning
+  - GradNorm
+  - SHAP
+  - explainable AI
+  - policy NLP
+abstract: > "Companion repository for the manuscript 'An Interpretable
+  Multi-Task Fusion Framework for Wind Farm Siting Combining Policy
+  Semantics and Meteorological Features'. Implements a cross-modal
+  architecture that fuses TabTransformer on 16 spatial features,
+  Chinese-BERT+LoRA on policy text, and 4-head cross-modal attention,
+  balanced by GradNorm across three task heads, with SHAP-based
+  interpretability. Validated against nine SCADA-confirmed sites in China."
