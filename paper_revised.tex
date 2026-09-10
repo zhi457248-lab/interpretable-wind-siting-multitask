@@ -75,9 +75,9 @@ encodes---the policy stream therefore operates as a
 \textit{province-level prior corrector} rather than a
 fine-grained semantic encoder. Independent validation
 against six SCADA wind farms (the only ones for which
-Chen2022 SCADA xlsx data are available; the validation file
-additionally lists three synthetic duplicates that lack
-measured power data)
+Chen~\cite{chen2022scada} SCADA data are available; the
+validation file additionally lists three synthetic duplicates
+that lack measured power data)
 shows that 2/6 sites rank in the top 10\% and 3/6 in the
 top 15\% of all 13,197 grid points (mean rank 3160). Per-province
 macro-averaged AUC over 11 provinces with both pos and neg samples
@@ -578,6 +578,7 @@ attention and gating; and the output heads jointly optimise
 three siting objectives.
 
 \subsection{Overall Framework}
+\label{sec:unified}
 
 Figure~\ref{fig:wind_farm_framework} shows the complete
 dual-stream architecture. The left blue stream encodes 16
@@ -612,6 +613,7 @@ to a 64-dimensional latent space, processed by 2-layer
 4-head self-attention~\cite{vaswani2017}, and mean-pooled to produce
 $\mathbf{F}_\text{num}$.
 
+\begin{sloppypar}
 The \textbf{policy-semantic stream} encodes unstructured
 regulatory text into dense vectors that interact with numerical
 features. We fine-tune on 1,400 annotated sentences with
@@ -634,6 +636,7 @@ fine-tuned model generates sentence-level embeddings per
 document, aggregates by provincial boundary, and maps each
 of the 13,197 ERA5 grid points to
 $\mathbf{F}_\text{policy} \in \mathbb{R}^{64}$.
+\end{sloppypar}
 
 The \textbf{cross-modal attention fusion module} adaptively
 combines both stream outputs using 4-head cross-modal
@@ -913,38 +916,35 @@ on a strict, audit-trail-equal basis (unlike a
 multiple-seed best-checkpoint selection, which we do
 not perform in this paper).}
 \label{tab:exps}
-\small
-\begin{tabularx}{\textwidth}{clXllX}
+\footnotesize
+\begin{tabularx}{\textwidth}{c l X l c X}
 \toprule
 \textbf{Exp.} & \textbf{Positive source} & \textbf{Split strategy} &
 \textbf{Features} & \textbf{AUC} & \textbf{Purpose} \\
 \midrule
-1 & 9-row validation file (6 SCADA, 3 coord.\ duplicates) & Independent spatial hold-out &
+1 & Validation file (6 SCADA, 3 coord.) & Independent spatial hold-out &
   Num.+policy & \textbf{0.7285} & Real-world generalisation \\
 2 & OSM 1,115 & Strict east--west (108$^\circ$E) &
   Num.+policy & \textbf{0.6710} & Geographic generalisation \\
 3 & OSM 1,115 & Stratified provincial &
-  Num. only & 0.8838$^\S$ & RandomForest baseline (§\ref{sec:baselines}) \\
+  Num.\ only & 0.8838$^\S$ & RF baseline (\S\ref{sec:baselines}) \\
 4 & OSM 1,115 & Stratified provincial &
-  Num.+policy & 0.8386$^\ddagger$ & Primary result, ablation, SHAP \\
+  Num.+policy & 0.8386$^\ddagger$ & Primary, ablation, SHAP \\
 \bottomrule
-\multicolumn{6}{p{0.95\textwidth}}{\small
-  $^\ddagger$ Experiment~4 uses the constrained negative
-  sampling protocol of Appendix~\ref{sec:appendix}: a
-  10\,km spatial buffer from positives, slope $\leq 25^\circ$,
-  elevation $\leq 3{,}500$\,m, and settlement distance
-  $\geq 0.5$\,km. The reduction from 0.8595 (unconstrained) to
-  0.8386 reflects increased task difficulty, not model
-  degradation; AP rises from 0.3023 to 0.7333 as the positive
-  rate is corrected from 11\% to 33\%.
-  $^\S$ Experiment~3 and the RandomForest row of
-  Section~\ref{sec:baselines} report the same numerical-only
-  model class (random forest, $n=500$) on the same
-  constrained protocol; the AUC values match to 0.1\%.
-  Earlier-draft Experiment~3 reported $0.8820$ under a
-  different seed; that number is superseded by the
-  Section~\ref{sec:baselines} RandomForest row reported
-  here.} \\
+\multicolumn{6}{@{}>{\raggedright\arraybackslash}p{0.95\textwidth}@{}}{\footnotesize
+  $^\ddagger$\,Exp.~4 uses the constrained protocol of
+  Appendix~\ref{sec:appendix}: 10\,km buffer, slope
+  $\leq 25^\circ$, elevation $\leq 3{,}500$\,m,
+  settlement distance $\geq 0.5$\,km. AUC drops
+  0.8595$\to$0.8386 because the task is harder, not the
+  model weaker; AP rises 0.3023$\to$0.7333 as the positive
+  rate is corrected 11\%$\to$33\%.\par
+  $^\S$\,Exp.~3 and the RandomForest row of
+  Section~\ref{sec:baselines} use the same numerical-only
+  model ($n=500$) on the same protocol; AUCs match to
+  0.1\%. An earlier draft reported $0.8820$ under a
+  different seed; superseded by the
+  Sec.~\ref{sec:baselines} RandomForest row.} \\
 \end{tabularx}
 \end{table}
 
@@ -1253,6 +1253,7 @@ RandomForest uses $n=500$ trees, MLP uses a (64, 32) ReLU
 architecture with early stopping on validation, and LogReg uses
 $L_2$ with $C=1$.
 
+\begin{sloppypar}
 Table~\ref{tab:baselines} reports the results. RandomForest
 achieves the highest AUC ($0.8838$), exceeding the
 TabTransformer's numerical stream by $\Delta\text{AUC}=+0.0452$
@@ -1263,6 +1264,7 @@ resamples). On the same metric, TabTransformer's full model
 ($0.8386$ vs.\ $0.8838$, $\Delta=-0.0452$). MLP achieves
 $0.7971$ (numerical stream only) and LogReg achieves
 $0.6990$ (no non-linear feature interactions).
+\end{sloppypar}
 
 \begin{table}[H]
 \centering
@@ -1763,7 +1765,7 @@ interpreted as a national pre-screening tool that captures
 the dominant provincial-scale policy gradient, not a
 site-level policy-aware model.
 
-\subsection{Gate Value $g$: Geographic Mechanisms and
+\subsection{Gate Value \texorpdfstring{$g$}{g}: Geographic Mechanisms and
 Cross-Modal Attention Validation}
 \label{sec:gating}
 
