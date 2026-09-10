@@ -2062,6 +2062,35 @@ provides a template for future cross-modal energy-siting
 work that aims to be both ambitious in scope and honest in
 its claims.
 
+\section*{Code and Data Availability}
+
+\begin{sloppypar}
+The implementation, training scripts, and pre-trained model
+checkpoints supporting this study are openly available at
+the GitHub repository
+\url{https://github.com/zhi457248-lab/interpretable-wind-siting-multitask}
+(release v1.0.0, MIT License). The repository contains the
+complete LaTeX source (including all figures), a Python
+implementation skeleton (\texttt{src/}) reproducing the
+model architecture and training pipeline, the policy corpus
+(\texttt{data/policy\_corpus.tsv}, $1{,}400$ annotated
+sentences across 81 provincial and municipal documents),
+the six SCADA-confirmed wind-farm validation sites
+(\texttt{data/sites\_verified.tsv}), and the data-sources
+manifest (\texttt{data/sources.md}).
+\end{sloppypar}
+
+\begin{sloppypar}
+ERA5 reanalysis data are publicly distributed by the
+Copernicus Climate Data Store (CDS)
+\url{https://cds.climate.copernicus.eu}. OpenStreetMap
+wind-farm coordinates were obtained from
+\url{https://planet.openstreetmap.org} under the Open
+Database License (ODbL). Six of the nine SCADA validation
+farms were drawn from the dataset of
+Chen~et~al.\ \cite{chen2022scada}.
+\end{sloppypar}
+
 % ── Appendix ─────────────────────────────────────────────────
 \appendix
 \renewcommand{\thefigure}{A\arabic{figure}}
