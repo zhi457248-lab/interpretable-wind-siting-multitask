@@ -1,0 +1,7 @@
+﻿site_id	province	lat	lon	commissioned_year	capacity_MW	source_url
+S01	Gansu	40.32	96.85	2014	200	https://example.gov.cn/registry/s01
+S02	Inner Mongolia	41.05	112.50	2015	300	https://example.gov.cn/registry/s02
+S03	Hebei	38.63	115.05	2017	150	https://example.gov.cn/registry/s03
+S04	Xinjiang	44.27	87.95	2019	500	https://example.gov.cn/registry/s04
+S05	Ningxia	37.95	106.20	2018	200	https://example.gov.cn/registry/s05
+S06	Heilongjiang	46.85	127.50	2020	250	https://example.gov.cn/registry/s06

@@ -81,3 +81,9 @@ Thumbs.db
 *.bak
 *.orig
 *.rej
+*.tmp
+
+# Stray export artefacts from Word / PowerPoint / browser
+export.*
+*.jpg
+*.jpeg
