@@ -119,7 +119,7 @@ siting models.
 
 By end-2024, China's total installed wind capacity reached
 521\,GW, accounting for 45.8\% of the global
-total~\cite{ruan2025,he2023}; combined wind and solar capacity
+total~\cite{ruan2025,he2020}; combined wind and solar capacity
 surpassed coal-fired power for the first time in early
 2025~\cite{ruan2025}. The 14th and 15th Five-Year Plans for
 renewable energy~\cite{ndrc2022,ndrc2026} both mandate
@@ -145,7 +145,7 @@ expert-assigned criterion weights, making results sensitive to
 the weighting scheme and unable to ingest policy-document
 semantics directly~\cite{xu2020,wu2022}. Pure machine-learning
 frameworks have advanced discriminative accuracy --- Bilgili
-et al.~\cite{bilgili2024} achieved 96.07\% accuracy with
+et al.~\cite{bilgili2024xai} achieved 96.07\% accuracy with
 XGBoost and SHAP (SHapley Additive exPlanations), and Chen
 et al.~\cite{chen2026} built
 spatio-temporal probability models at China's regional scale;
@@ -157,7 +157,7 @@ to optimise onshore wind-station locations in Guangdong ---
 but all of these works treat regulatory compliance as a binary
 preprocessing mask, discarding the semantic gradient among
 encouraging, restrictive, and prohibitory intents. The recent
-proliferation of systematic reviews~\cite{resch2023heliyon,jurasz2025}
+proliferation of systematic reviews~\cite{wimhurst2023heliyon,jurasz2025}
 documents this standardisation gap and motivates models that
 preserve policy context rather than discarding it. NLP methods
 open a path for extracting constraints from unstructured text:
@@ -271,7 +271,7 @@ and prohibitory regulatory intents.
 
 Machine learning methods have substantially advanced
 discriminative accuracy beyond the linear-weighting limitation
-of MCDM. Bilgili et al.~\cite{bilgili2024} achieved 96.07\%
+of MCDM. Bilgili et al.~\cite{bilgili2024xai} achieved 96.07\%
 accuracy with XGBoost combined with SHAP on a Turkish wind-farm
 dataset. Chen et al.~\cite{chen2026} built spatio-temporal
 probability distribution models for wind and solar siting at
@@ -290,7 +290,7 @@ validation against real operational data, relying instead on
 administrative boundary labels or expert judgements, which
 introduces circularity. Methodological surveys of explainable
 AI~\cite{samek2021} and recent benchmarking work on tabular
-deep learning~\cite{shwartz2022,borisov2022} together provide
+deep learning~\cite{shwartz2022,borisov2024} together provide
 the contemporary methodological vocabulary on which our
 cross-modal design rests.
 
@@ -604,7 +604,7 @@ slope and elevation). TabTransformer applies learnable linear
 embeddings per feature followed by Transformer self-attention,
 automatically capturing cross-feature contextual dependencies
 without manual feature engineering; recent deep-learning
-surveys of tabular data~\cite{borisov2022,shwartz2022} and the
+surveys of tabular data~\cite{borisov2024,shwartz2022} and the
 foundational treatment of representation learning~\cite{lecun2015}
 together motivate this attention-based design choice over
 hand-engineered concatenation. The 16 features are mapped
@@ -1645,7 +1645,7 @@ favourable range. Northeast Jilin benefits from minimal
 slope ($<$0.5$^\circ$) and sustained provincial policy
 encouragement. This pattern is consistent with wind-energy
 priority zones designated in the 14th and 15th Five-Year
-Plans~\cite{ndrc2022,ndrc2026,he2023,zhong2022}.
+Plans~\cite{ndrc2022,ndrc2026,he2020,zhong2022}.
 
 \begin{figure}[H]
 \centering
@@ -1660,7 +1660,7 @@ Plans~\cite{ndrc2022,ndrc2026,he2023,zhong2022}.
 
 \subsection{Comparison with Existing Work}
 
-Bilgili et al.~\cite{bilgili2024} achieved 96.07\% accuracy
+Bilgili et al.~\cite{bilgili2024xai} achieved 96.07\% accuracy
 on a Turkish dataset with XGBoost, treating policy constraints
 as preprocessing binary masks. On the larger Chinese dataset
 this paper instead models policy text through a sentence-level
@@ -2017,7 +2017,7 @@ tree-based baseline.
 High-suitability zones are concentrated in Xinjiang, Inner
 Mongolia, Gansu, and Jilin, consistent with wind-energy
 priority zones designated in the 14th and 15th Five-Year
-Plans~\cite{ndrc2022,ndrc2026,he2023,zhong2022}. The
+Plans~\cite{ndrc2022,ndrc2026,he2020,zhong2022}. The
 framework is applicable to national-level pre-screening in
 the Three-North region west of 108$^\circ$E; its
 application in the eastern monsoon zone requires
@@ -2177,17 +2177,13 @@ performance and feature importance}
 % ── References ───────────────────────────────────────────────
 \begin{thebibliography}{99}
 
-\bibitem{bilgili2024}
-Bilgili M, et al.
-Wind farm site selection using XGBoost with SHAP explainability.
-\textit{Energy Conversion and Management}.
-2024;309:118441.
-
 \bibitem{chen2026}
-Chen X, et al.
-Spatially explicit wind farm siting probability across China at 1\,km.
-\textit{Renewable Energy}.
-2026;218:115406.
+Chen J, Shen J, Zhang S, Wang R, Zhen Z,
+Wang C, Cai W.
+Solar and wind power plant site selection in China:
+Machine learning-based regional and temporal probability.
+\textit{Applied Energy}.
+2026;402:127033.
 
 \bibitem{buster2024}
 Buster G, et al.
@@ -2202,10 +2198,12 @@ BERT-based classification of Chinese energy policy texts.
 2023;181:113712.
 
 \bibitem{xu2020}
-Xu Z, et al.
-GIS-based MCDM wind farm site selection in China.
-\textit{Renewable Energy}.
-2020;165:987--1001.
+Xu Y, Li W, Wang Y, Zhang S, Wang Q,
+Du Y.
+Site selection of wind farms using GIS and multi-criteria
+decision making method in Wafangdian, China.
+\textit{Energy}.
+2020;207:117667.
 
 \bibitem{huang2020tabtransformer}
 Huang X, Khetan A, Cvitkovic M, Karnin Z.
@@ -2285,12 +2283,13 @@ Wind speed distributions used in wind energy assessment: a review.
 \textit{Frontiers in Energy Research}.
 2021;9:769920.
 
-\bibitem{he2023}
-He G, Lin J, Sifuentes F, Liu X, Abhyankar N, Phadke A.
-Accelerating the energy transition towards photovoltaic
-and wind in China.
-\textit{Nature}.
-2023;619:885--892.
+\bibitem{he2020}
+He G, Lin J, Sifuentes F, Liu X,
+Abhyankar N, Phadke A.
+Rapid cost decrease of renewables and storage accelerates
+the decarbonization of China's power system.
+\textit{Nature Communications}.
+2020;11:2486.
 
 \bibitem{zhong2022}
 Zhong W, Qu X, Lv Q.
@@ -2299,10 +2298,13 @@ Toward carbon neutrality and China's 14th Five-Year Plan.
 2022;87:104231.
 
 \bibitem{wu2022}
-Wu B, Yao S, Shen Y.
-A review of GIS-based multi-criteria wind farm site selection methods.
+Shorabeh SN, Karimi Firozjaei H,
+Karimi Firozjaei M, Jelokhani-Niaraki M,
+Homaee M, Nematollahi O.
+The site selection of wind energy power plant using
+GIS-multi-criteria evaluation from economic perspectives.
 \textit{Renewable and Sustainable Energy Reviews}.
-2022;168:112753.
+2022;168:112778.
 
 \bibitem{qiu2025gated}
 Qiu Z, Wang Z, Zheng B, et al.
@@ -2433,11 +2435,13 @@ Tabular data: deep learning is not all you need.
 2022;81:84--90.
 arXiv:2106.03253.
 
-\bibitem{borisov2022}
-Borisov V, Leemann T, Seßler K, Haug J, Pawelczyk M, Kasneci G.
+\bibitem{borisov2024}
+Borisov V, Leemann T, Seßler K, Haug J,
+Pawelczyk M, Kasneci G.
 Deep neural networks and tabular data: a survey.
 \textit{IEEE Transactions on Neural Networks and Learning Systems}.
-2022;35(6):7499--7519.
+2024;35(6):7499--7519.
+doi:10.1109/TNNLS.2022.3229161.
 
 \bibitem{samek2021}
 Samek W, Montavon G, Lapuschkin S, Anders CJ, M\"uller K-R.
@@ -2462,8 +2466,8 @@ In: \textit{Proceedings of the 57th Annual Meeting of the
 Association for Computational Linguistics}. Florence, Italy;
 2019. p.6558--6569.
 
-\bibitem{resch2023heliyon}
-Resch E, Bohning C, West J, et al.
+\bibitem{wimhurst2023heliyon}
+Wimhurst JJ, Nsude CC, Greene JS.
 Standardizing the factors used in wind farm site suitability
 models: a review.
 \textit{Heliyon}.
